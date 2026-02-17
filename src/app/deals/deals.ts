@@ -1,33 +1,42 @@
 import { Component } from '@angular/core';
-import { Restraunt } from '../model/restrauntModel';
+import { CommonModule } from '@angular/common'; // Add this just in case
+import { Restaurant } from '../model/restaurantModel';
 
 @Component({
   selector: 'app-deals',
-  imports: [],
+  standalone: true, // Ensure this is true for modern Angular
+  imports: [CommonModule], // Resolves NG8103
   templateUrl: './deals.html',
-  styleUrl: './deals.css',
+  styleUrls: ['./deals.css']
 })
-
 export class DealsComponent {
-  // Initial active category
-  activeCategory: string = 'Pizza & Fast food';
+  categories: string[] = ['Vegan', 'Sushi', 'Pizza & Fast food', 'others'];
+  selectedCategory: string = 'Pizza & Fast food';
 
-  // Mock Data (Replace with Service call later)
-  allRestaurants: Restraunt[] = [
-    { id: 1, name: 'Chef Burgers London', discount: '-40%', image: 'assets/burgers.jpg', category: 'Pizza & Fast food' },
-    { id: 2, name: 'Grand Ai Cafe London', discount: '-20%', image: 'assets/cafe.jpg', category: 'Vegan' },
-    { id: 3, name: 'Butterbrot Caf\'e London', discount: '-17%', image: 'assets/butterbrot.jpg', category: 'Pizza & Fast food' },
-    { id: 4, name: 'Sushi Masters', discount: '-25%', image: 'assets/sushi.jpg', category: 'Sushi' },
-    { id: 5, name: 'Green Garden', discount: '-15%', image: 'assets/vegan-bowl.jpg', category: 'Vegan' },
+  allRestaurants: Restaurant[] = [
+    { name: 'Chef Burgers London', discount: '-40%', image: 'assets/h1.avif', category: 'Pizza & Fast food' },
+    { name: 'Grand Ai Cafe London', discount: '-20%', image: 'assets/cafe.jpg', category: 'Vegan' },
+    { name: 'Butterbrot Caf\'e London', discount: '-17%', image: 'assets/h2.avif', category: 'Pizza & Fast food' },
+        { name: 'Butterbrot Caf\'e London', discount: '-17%', image: 'assets/h3.avif', category: 'Pizza & Fast food' },
+
+            { name: 'Butterbrot Caf\'e London', discount: '-17%', image: 'assets/h4.avif', category: 'Vegan' },
+
+                { name: 'Butterbrot Caf\'e London', discount: '-17%', image: 'assets/h5.avif', category: 'Vegan' },
+
+                    { name: 'Butterbrot Caf\'e London', discount: '-17%', image: 'assets/h6.avif', category: 'Sushi' },
+
+                        { name: 'Butterbrot Caf\'e London', discount: '-17%', image: 'assets/h8.avif', category: 'Sushi' },
+
+                            { name: 'Butterbrot Caf\'e London', discount: '-17%', image: 'assets/h7.avif', category: 'Sushi' }
+
+    
   ];
 
-  // Logic to filter restaurants based on selection
   get filteredRestaurants() {
-    return this.allRestaurants.filter(res => res.category === this.activeCategory);
+    return this.allRestaurants.filter(res => res.category === this.selectedCategory);
   }
 
-  // Method to update the UI
-  setCategory(category: string): void {
-    this.activeCategory = category;
+  setCategory(cat: string) {
+    this.selectedCategory = cat;
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { MenuService } from '../services/menu-service';
 import { MenuSection } from '../model/menuSection';
-import { Restraunt} from '../model/restrauntModel';  
+import { Restaurant} from '../model/restaurantModel';  
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserModel } from '../model/UserModel';

@@ -1,45 +1,31 @@
-
-<section class="deals-container">
-  <header class="deals-header">
-    <h2>Up to -40% 🎊 Order.uk exclusive deals</h2>
-    <nav class="category-nav">
-      <a href="#">Vegan</a>
-      <a href="#">Sushi</a>
-      <a href="#" class="active">Pizza & Fast food</a>
-      <a href="#">others</a>
+<div class="deals-wrapper">
+  <div class="deals-header">
+    <h1 class="deals-title">Up to -40% 🎊 Order.uk exclusive deals</h1>
+    
+    <nav class="category-tabs">
+      @for (cat of categories; track cat) {
+        <button 
+          (click)="setCategory(cat)"
+          [class.active]="selectedCategory === cat">
+          {{ cat }}
+        </button>
+      }
     </nav>
-  </header>
-
-  <div class="deals-grid">
-    <div class="deal-card">
-      <div class="card-image" style="background-image: url('https://plus.unsplash.com/premium_photo-1670984940113-f3aa1cd1309a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cmVzdHJhdW50fGVufDB8fDB8fHww');">
-        <span class="discount-tag">-40%</span>
-        <div class="card-overlay">
-          <p class="category-label">Restaurant</p>
-          <h3>Chef Burgers London</h3>
-        </div>
-      </div>
-    </div>
-
-    <div class="deal-card">
-      <div class="card-image" style="background-image: url('https://plus.unsplash.com/premium_photo-1679503585289-c02467981894?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHJlc3RyYXVudHxlbnwwfHwwfHx8MA%3D%3D');">
-        <span class="discount-tag">-20%</span>
-        <div class="card-overlay">
-          <p class="category-label">Restaurant</p>
-          <h3>Grand Ai Cafe London</h3>
-        </div>
-      </div>
-    </div>
-
-    <div class="deal-card">
-      <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1692758344348-dd94f4db1848?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
-        <span class="discount-tag">-17%</span>
-        <div class="card-overlay">
-          <p class="category-label">Restaurant</p>
-          <h3>Butterbrot Caf'e London</h3>
-        </div>
-      </div>
-    </div>
   </div>
-</section>
 
+  <div class="restaurant-grid">
+    @for (res of filteredRestaurants; track res.name) {
+      <div class="restaurant-card">
+        <div class="img-container" [style.background-image]="'url(' + res.image + ')'">
+          <div class="discount-badge">{{ res.discount }}</div>
+          <div class="content-overlay">
+            <span class="label">Restaurant</span>
+            <h2 class="res-name">{{ res.name }}</h2>
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <p>No deals found for this category.</p>
+    }
+  </div>
+</div>
